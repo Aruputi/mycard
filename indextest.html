@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arup Bhowmik | Mutual Fund Distributor - Grow Your Wealth</title>
+    
+<script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom Font Import */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f9fc; /* Light, professional background */
+            color: #1f2937; /* Dark gray text */
+            scroll-behavior: smooth;
+        }
+
+        /* --- VIBRANT COLOR PALETTE --- */
+        .primary-bg { /* Deep Navy/Charcoal - Trust and Depth */
+            background-color: #082032; 
+        }
+        .text-primary-bg { /* Text color matching primary-bg */
+            color: #082032;
+        }
+        .text-accent-teal { /* Electric Teal - Growth and Energy */
+            color: #13C2C2;
+        }
+        .border-accent-teal {
+            border-color: #13C2C2;
+        }
+        .text-cta-color { /* Vibrant Gold/Amber - Action */
+            color: #FDD835; 
+        }
+
+        /* --- ANIMATIONS AND STYLING --- */
+
+        /* 1. Hero Section Fade In */
+        @keyframes hero-fade-in {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .hero-animate > * {
+            animation: hero-fade-in 1s ease-out both;
+        }
+        .hero-animate h2 { animation-delay: 0.1s; }
+        .hero-animate p { animation-delay: 0.3s; }
+        .hero-animate .cta-group { animation-delay: 0.5s; }
+
+        /* --- UPDATED: Hero Background Image and Overlay --- */
+        .hero-background-image {
+            /* Using an abstract image related to finance, growth, or charts */
+            background-image: url('heroback.jpg');
+            background-size: cover;
+            background-position: center;
+            position: relative; /* Establish context for z-index and pseudo-element */
+            z-index: 1;
+        }
+        
+        /* Dark overlay for maximum text legibility */
+        .hero-background-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            /* Deep Navy overlay with 75% opacity */
+            background-color: rgba(8, 32, 50, 0.75); 
+            z-index: 2;
+        }
+        /* Ensure the content (text and buttons) sits above the overlay */
+        .hero-background-image > .max-w-7xl {
+            position: relative;
+            z-index: 3; 
+        }
+
+        /* 2. CTA Shimmer Effect (New) */
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+        .cta-shimmer {
+            background-image: linear-gradient(90deg, #FDD835 0%, #FFEB3B 50%, #FDD835 100%);
+            background-size: 200% 100%;
+            transition: none !important; /* Prevent hover transition conflict */
+        }
+        .cta-shimmer:hover {
+            animation: shimmer 2.5s infinite linear; /* Apply shimmer on hover */
+        }
+        
+        /* CTA Button Base Styling */
+        .cta-button {
+            background-color: #FDD835; 
+            color: #082032; /* Text color for CTA is always primary-bg */
+            font-weight: 700;
+            transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+        }
+        .cta-button:hover {
+            background-color: #ffc107; /* Slightly lighter gold on hover */
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px -5px rgba(253, 216, 53, 0.4); /* Gold glow shadow */
+        }
+
+        /* 3. Enhanced Service Card Hover Effect */
+        .section-header {
+            border-bottom: 3px solid #13C2C2; /* Teal underline */
+            display: inline-block;
+            padding-bottom: 4px;
+        }
+        .service-card {
+            transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.4s;
+            border-radius: 1rem; /* More rounded */
+        }
+        .service-card:hover {
+            transform: translateY(-8px); /* Deeper lift */
+            /* Teal glow shadow */
+            box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.3), 0 0 0 4px #13C2C2; 
+        }
+
+        /* Calculator Styles */
+        input[type=range] {
+            width: 100%;
+            -webkit-appearance: none;
+            appearance: none;
+            height: 8px; /* Thicker track */
+            background: #e0e0e0; /* Light gray track */
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            background: #13C2C2; /* Teal thumb */
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 0 0 4px rgba(19, 194, 194, 0.3);
+            margin-top: -6px; /* Adjust to center thumb on track */
+        }
+        input[type=range]::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            background: #13C2C2; /* Teal thumb */
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 0 0 4px rgba(19, 194, 194, 0.3);
+        }
+        
+        .calc-input {
+            width: 8rem; /* Fixed width for number input */
+            text-align: right;
+            padding: 0.5rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 0.5rem;
+            transition: border-color 0.3s;
+        }
+
+        .calc-input:focus {
+            border-color: #13C2C2;
+            outline: none;
+        }
+
+        .tab-button.active {
+            background-color: #13C2C2; /* Teal active tab */
+            color: #082032; /* Dark Navy text */
+            font-weight: 700;
+        }
+
+        /* --- NEW: Performance Slider Styles --- */
+        .slider-container {
+            overflow: hidden;
+        }
+        .slider-wrapper {
+            display: flex;
+            animation: slide-funds 20s linear infinite; /* Adjust time for speed */
+        }
+        .fund-card {
+            min-width: 90%; /* Show most of one card on mobile */
+            margin-right: 1.5rem; /* Gap between cards */
+            flex-shrink: 0;
+            padding: 1.5rem;
+            border: 1px solid #e0e0e0;
+            background-color: #ffffff;
+            transition: transform 0.3s;
+        }
+
+        /* Clone the cards to allow infinite looping */
+        .fund-card:last-child {
+            margin-right: 0;
+        }
+
+        @keyframes slide-funds {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(calc(-50% - 1.5rem)); } /* Needs JS adjustment for smoother loop */
+        }
+        
+        /* Pause on hover */
+        .slider-wrapper:hover {
+            animation-play-state: paused;
+        }
+
+        @media (min-width: 768px) {
+            .fund-card {
+                min-width: calc(33.333% - 1rem); /* Show ~3 cards on desktop */
+                margin-right: 1.5rem;
+            }
+            @keyframes slide-funds {
+                0% { transform: translateX(0); }
+                100% { transform: translateX(calc(-25% - 1.5rem)); } /* Adjust based on number of visible cards */
+            }
+        }
+        @media (min-width: 1024px) {
+            .fund-card {
+                min-width: calc(25% - 1.125rem); /* Show 4 cards on large screens */
+                margin-right: 1.5rem;
+            }
+            @keyframes slide-funds {
+                0% { transform: translateX(0); }
+                100% { transform: translateX(calc(-20% - 1.2rem)); } /* Adjust for number of cards */
+            }
+        }
+        /* End: Performance Slider Styles */
+
+        /* Mobile Responsive Enhancements (Added for better touch targets and spacing) */
+        @media (max-width: 768px) {
+            .hero-animate h2 {
+                font-size: 2.5rem; /* Slightly smaller for small screens */
+            }
+            .hero-animate p {
+                font-size: 1.125rem;
+            }
+            .cta-group a {
+                width: 100%; /* Full width CTAs on mobile */
+                text-align: center;
+            }
+            
+            /* Ensure calculator inputs are readable and touchable */
+            .calculator-panel .space-y-6 > div {
+                padding-bottom: 1rem;
+            }
+            .calculator-panel label {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .calc-input {
+                margin-top: 0.5rem;
+                width: 100%;
+                text-align: left;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    
+<div id="messageModal" class="modal fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center p-4 hidden z-50">
+        <div class="bg-white p-6 rounded-xl shadow-2xl w-full max-w-sm transform transition-all duration-300 scale-95 opacity-0" id="modalContent">
+            <h3 class="text-xl font-bold mb-3 text-gray-800" id="modalTitle"></h3>
+            <p class="text-gray-600 mb-6" id="modalMessage"></p>
+            <button id="closeModal" class="w-full primary-bg text-white py-2 rounded-lg font-semibold hover:opacity-90 transition">Close</button>
+        </div>
+    </div>
+
+    
+<header class="primary-bg shadow-lg sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <h1 class="text-2xl font-bold text-white tracking-wider">
+                <span class="text-accent-teal">Arup</span>Bhowmik
+            </h1>
+            
+<nav class="space-x-4 hidden md:block">
+                <a href="#about" class="text-white hover:text-accent-teal transition duration-150">About Me</a>
+                <a href="#services" class="text-white hover:text-accent-teal transition duration-150">Services</a>
+                <a href="#performance" class="text-white hover:text-accent-teal transition duration-150">Top Funds</a>
+                <a href="#calculators" class="text-white hover:text-accent-teal transition duration-150">Calculators</a>
+                <a href="#partners" class="text-white hover:text-accent-teal transition duration-150">Partners</a>
+                <a href="#contact" class="text-white hover:text-accent-teal transition duration-150">Contact</a>
+            </nav>
+            <div class="flex items-center space-x-4">
+                
+                <a href="#contact" class="cta-button primary-bg px-4 py-2 rounded-lg font-semibold hidden md:block shadow-md">Book a Free Call</a>
+            
+                <button id="mobile-menu-button" class="md:hidden text-white focus:outline-none p-2 rounded-md hover:bg-gray-700 transition duration-150" onclick="toggleMobileMenu()">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    
+<div id="mobile-menu" class="fixed top-0 left-0 w-full h-full primary-bg z-50 transform -translate-x-full transition-transform duration-300 md:hidden">
+        <div class="p-4 flex justify-between items-center h-16 shadow-lg border-b border-gray-700">
+            <h1 class="text-2xl font-bold text-white tracking-wider">
+                <span class="text-accent-teal">Arup</span>Bhowmik
+            </h1>
+            <button class="text-white focus:outline-none p-2 rounded-md hover:bg-gray-700 transition duration-150" onclick="toggleMobileMenu()">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+        </div>
+        <nav class="flex flex-col space-y-4 p-8">
+            <a href="#about" onclick="toggleMobileMenu()" class="text-white text-xl hover:text-accent-teal transition duration-150 py-2 border-b border-gray-700">About Me</a>
+            <a href="#services" onclick="toggleMobileMenu()" class="text-white text-xl hover:text-accent-teal transition duration-150 py-2 border-b border-gray-700">Services</a>
+            <a href="#performance" onclick="toggleMobileMenu()" class="text-white text-xl hover:text-accent-teal transition duration-150 py-2 border-b border-gray-700">Top Funds</a>
+            <a href="#calculators" onclick="toggleMobileMenu()" class="text-white text-xl hover:text-accent-teal transition duration-150 py-2 border-b border-gray-700">Calculators</a>
+            <a href="#partners" onclick="toggleMobileMenu()" class="text-white text-xl hover:text-accent-teal transition duration-150 py-2 border-b border-gray-700">Partners</a>
+            <a href="#contact" onclick="toggleMobileMenu()" class="text-white text-xl hover:text-accent-teal transition duration-150 py-2 mb-4">Contact</a>
+            
+            <!-- The 'Schedule Your Free Consultation' link (id="mobile-schedule-link") has been removed to match the updated navigation intent. -->
+        </nav>
+    </div>
+
+    <main>
+        
+<section id="hero" class="hero-background-image text-white py-20 md:py-32">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center hero-animate">
+                <h2 class="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4 leading-tight">
+                    Your Trusted Partner for <span class="text-accent-teal">Mutual Fund Investments</span>
+                </h2>
+                <p class="text-xl md:text-2xl font-light max-w-3xl mx-auto mb-8">
+                    Personalized, goal-driven investment strategies designed to build your future wealth with discipline.
+                </p>
+                <div class="space-y-4 sm:space-y-0 sm:space-x-6 cta-group">
+      
+                    <a href="#services" class="inline-block text-lg font-bold px-8 py-3 rounded-xl bg-white text-primary-bg hover:bg-gray-100 transition duration-150 shadow-xl">
+                        Explore Services
+                    </a>
+                </div>
+                <p class="mt-4 text-sm opacity-80">No commitment. Just clarity for your financial future.</p>
+            </div>
+        </section>
+
+        
+<section id="about" class="py-16 md:py-24 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl font-bold section-header mb-12 text-center">About Arup Bhowmik & My Philosophy</h2>
+                <div class="md:flex md:space-x-12 items-center">
+                    
+<div class="w-full md:w-1/3 mb-8 md:mb-0 flex justify-center">
+                        <img 
+                            src="mY_photo_original.jpg" 
+                            onerror="this.onerror=null; this.src='https://placehold.co/300x350/082032/ffffff?text=Arup+Bhowmik+Photo'"
+                            alt="Professional portrait of Arup Bhowmik" 
+                            class="rounded-2xl shadow-xl w-64 h-auto object-cover"
+                        >
+                    </div>
+                    
+                    <div class="w-full md:w-2/3">
+                        <p class="text-lg mb-6 text-gray-700 leading-relaxed">
+                            Hello! I’m <strong>Arup Bhowmik</strong>, a dedicated Mutual Fund Distributor. With a keen, goal-oriented approach, I bring focused <strong>dedication to helping clients achieve their long-term financial milestones</strong> through disciplined investing. My core focus is delivering transparent, unbiased advice centered entirely on <strong>your specific financial goals</strong>.
+                        </p>
+                        <h3 class="text-xl font-semibold mb-3 text-primary-bg">My Core Philosophy: Clarity, Compliance, and Growth</h3>
+                        <ul class="list-none space-y-3 text-gray-700">
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-accent-teal mr-2 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                                <strong>Goal-Oriented Planning:</strong> We don't just invest; we plan for your retirement, child’s education, or dream purchase with a structured approach.
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-accent-teal mr-2 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                                <strong>Unbiased Advice:</strong> I recommend only the best-suited funds from the entire market, focusing solely on your risk profile and long-term success.
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-accent-teal mr-2 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                                <strong>Continuous Review:</strong> I believe in consistent portfolio check-ups, ensuring your investments remain perfectly aligned with market changes and your evolving life.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        
+<section id="services" class="py-16 md:py-24 bg-indigo-50"> 
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl font-bold section-header mb-12 text-center">How I Help You Grow</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    
+                    
+<div class="service-card bg-white p-8 rounded-2xl shadow-xl border-t-4 border-accent-teal">
+                        <svg class="w-10 h-10 text-primary-bg mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                        <h3 class="text-xl font-bold mb-3 text-gray-800">Goal-Based Investment & Accumulation</h3>
+                        <p class="text-gray-600">
+                            We design flexible investment strategies utilizing <strong>SIP (Systematic Investment Plan)</strong> for compounding discipline and <strong>LUMPSUM</strong> investments for strategic market entry, tailored to meet your long-term goals efficiently.
+                        </p>
+                    </div>
+
+                    
+<div class="service-card bg-white p-8 rounded-2xl shadow-xl border-t-4 border-accent-teal">
+                        <svg class="w-10 h-10 text-primary-bg mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path></svg>
+                        <h3 class="text-xl font-bold mb-3 text-gray-800">Portfolio Review & Alignment</h3>
+                        <p class="text-gray-600">
+                            A comprehensive check of your existing mutual fund portfolio to ensure it's diversified, tax-efficient, and aligned with current market realities and your risk appetite. This includes rebalancing advice.
+                        </p>
+                    </div>
+                    
+                    
+<div class="service-card bg-white p-8 rounded-2xl shadow-xl border-t-4 border-accent-teal">
+                        <svg class="w-10 h-10 text-primary-bg mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5s3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18s-3.332.477-4.5 1.253"></path></svg>
+                        <h3 class="text-xl font-bold mb-3 text-gray-800">Income & Transfer Planning (SWP/STP)</h3>
+                        <p class="text-gray-600">
+                            I assist with setting up advanced strategies like <strong>SWP (Systematic Withdrawal Plan)</strong> for regular income needs and <strong>STP (Systematic Transfer Plan)</strong> for strategic risk management and asset allocation.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="mt-12 text-center">
+                    <p class="text-lg text-gray-700">Ready to build a robust portfolio?</p>
+                    <a href="#contact" class="cta-button inline-block text-primary-bg font-bold px-6 py-3 mt-4 rounded-xl shadow-md hover:shadow-lg transition">Get in Touch Today</a>
+                </div>
+            </div>
+        </section>
+
+        
+<section id="performance" class="py-16 md:py-24 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl font-bold section-header mb-8 text-center">AMC Performance Showcase</h2>
+                <p class="text-center text-lg text-gray-600 mb-10 max-w-3xl mx-auto">
+                    A glimpse at some of the top-performing schemes I recommend from leading AMCs. Details till September 2025.
+                </p>
+
+                
+<div class="slider-container relative">
+                    <div class="slider-wrapper" id="fundSlider">
+                        
+<div class="fund-card rounded-xl shadow-lg">
+                            <h3 class="text-lg font-bold text-accent-teal mb-2">UTI - Multi Asset Allocation Fund-Reg-gr</h3>
+                            <p class="text-sm text-gray-700 font-semibold mb-3">Category: Hybrid Fund</p>
+                            <div class="border-t border-gray-200 pt-3 space-y-2">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-sm text-gray-600">5-Year Return (CAGR):</span>
+                                    <span class="text-xl font-extrabold text-green-600">16.78%</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-sm text-gray-600">AUM:</span>
+                                    <span class="font-bold text-primary-bg">₹ 6,106.05 Cr</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+<div class="fund-card rounded-xl shadow-lg">
+                            <h3 class="text-lg font-bold text-accent-teal mb-2">SBI - Contra Fund - Reg-Gr</h3>
+                            <p class="text-sm text-gray-700 font-semibold mb-3">Category: Equity</p>
+                            <div class="border-t border-gray-200 pt-3 space-y-2">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-sm text-gray-600">5-Year Return (CAGR):</span>
+                                    <span class="text-xl font-extrabold text-green-600">29.07%</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-sm text-gray-600">AUM:</span>
+                                    <span class="font-bold text-primary-bg">₹ 47,216 Cr</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+<div class="fund-card rounded-xl shadow-lg">
+                            <h3 class="text-lg font-bold text-accent-teal mb-2">Nippon India Vision Large & Mid Cap Fund-Reg-Gr</h3>
+                            <p class="text-sm text-gray-700 font-semibold mb-3">Category: Equity</p>
+                            <div class="border-t border-gray-200 pt-3 space-y-2">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-sm text-gray-600">5-Year Return (CAGR):</span>
+                                    <span class="text-xl font-extrabold text-green-600">23.75%</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-sm text-gray-600">AUM:</span>
+                                    <span class="font-bold text-primary-bg">₹ 6,395.34 Cr</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+<div class="fund-card rounded-xl shadow-lg">
+                            <h3 class="text-lg font-bold text-accent-teal mb-2">Nippon India Large Cap Fund-Reg-Gr</h3>
+                            <p class="text-sm text-gray-700 font-semibold mb-3">Category: Large Equity</p>
+                            <div class="border-t border-gray-200 pt-3 space-y-2">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-sm text-gray-600">5-Year Return (CAGR):</span>
+                                    <span class="text-xl font-extrabold text-green-600">24.93%</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-sm text-gray-600">AUM:</span>
+                                    <span class="font-bold text-primary-bg">₹ 46,463.11 Cr</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- CLONES for infinite loop effect -->
+                        <div class="fund-card rounded-xl shadow-lg">
+                            <h3 class="text-lg font-bold text-accent-teal mb-2">ICICI Large Cap Fund-Reg-Gr</h3>
+                            <p class="text-sm text-gray-700 font-semibold mb-3">Category: Large Equity</p>
+                            <div class="border-t border-gray-200 pt-3 space-y-2">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-sm text-gray-600">5-Year Return (CAGR):</span>
+                                    <span class="text-xl font-extrabold text-green-600">22.5%</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-sm text-gray-600">AUM:</span>
+                                    <span class="font-bold text-primary-bg">₹ 73,034.52 Cr</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="fund-card rounded-xl shadow-lg">
+                            <h3 class="text-lg font-bold text-accent-teal mb-2">SBI PSU Fund-Reg-Gr</h3>
+                            <p class="text-sm text-gray-700 font-semibold mb-3">Category: Equity</p>
+                            <div class="border-t border-gray-200 pt-3 space-y-2">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-sm text-gray-600">5-Year Return (CAGR):</span>
+                                    <span class="text-xl font-extrabold text-green-600">32.39%</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-sm text-gray-600">AUM:</span>
+                                    <span class="font-bold text-primary-bg">₹ 5,519.44 Cr</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="fund-card rounded-xl shadow-lg">
+                            <h3 class="text-lg font-bold text-accent-teal mb-2">Nippon India Small Cap Fund-Reg-Gr</h3>
+                            <p class="text-sm text-gray-700 font-semibold mb-3">Category: Equity</p>
+                            <div class="border-t border-gray-200 pt-3 space-y-2">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-sm text-gray-600">5-Year Return (CAGR):</span>
+                                    <span class="text-xl font-extrabold text-green-600">32.57%</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-sm text-gray-600">AUM:</span>
+                                    <span class="font-bold text-primary-bg">₹ 66,136.11 Cr</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="fund-card rounded-xl shadow-lg">
+                            <h3 class="text-lg font-bold text-accent-teal mb-2">UTI Mid Cap Fund-Reg-Gr</h3>
+                            <p class="text-sm text-gray-700 font-semibold mb-3">Category: Equity</p>
+                            <div class="border-t border-gray-200 pt-3 space-y-2">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-sm text-gray-600">5-Year Return (CAGR):</span>
+                                    <span class="text-xl font-extrabold text-green-600">22.82%</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-sm text-gray-600">AUM:</span>
+                                    <span class="font-bold text-primary-bg">₹ 11,666.34 Cr</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <p class="text-xs text-center text-gray-500 mt-6 italic">
+                        *The data shown is for illustrative purposes only, based on assumed past performance of top-tier funds. Past performance is not indicative of future returns.*
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        
+<section id="education" class="py-16 md:py-24 bg-indigo-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl font-bold section-header mb-12 text-center">Mutual Fund Basics: Start Your Journey</h2>
+
+                
+<div class="md:grid md:grid-cols-3 gap-10 items-start">
+                    
+                    
+<div class="col-span-1 mb-8 md:mb-0">
+                        <h3 class="text-2xl font-semibold mb-4 text-primary-bg">What is a Mutual Fund?</h3>
+                        <p class="text-lg text-gray-700 mb-6 leading-relaxed">
+                            A <strong>Mutual Fund</strong>is a trust that pools the money of many investors who share a common investment objective. This money is then professionally managed by an <strong>Asset Management Company (AMC)</strong> to purchase securities like stocks, bonds, money market instruments, and other assets.
+                        </p>
+                        <p class="text-lg text-gray-700 leading-relaxed">
+                            Essentially, you buy <strong>units</strong> representing your share of the fund's holdings. It is the easiest way to achieve diversification and professional management, even with a small investment amount.
+                        </p>
+                    </div>
+                    
+                    
+<div class="col-span-1 mb-8 md:mb-0">
+                        <h3 class="text-2xl font-semibold mb-4 text-primary-bg">Power of Compounding in Mutual Funds</h3>
+                        <p class="text-lg text-gray-700 mb-6 leading-relaxed">
+                            The power of compounding means earning returns on both your original investment and the returns it generates over time. In simple terms, your money starts making more money for you.
+
+The longer you stay invested, the greater the growth. Even small, regular investments through SIPs can grow into a large corpus if you give them enough time.
+
+Starting early and staying invested with discipline helps you benefit the most from compounding.
+                        </p>
+                        
+                    </div>
+
+                    
+<div class="col-span-1">
+                        <h3 class="text-2xl font-semibold mb-4 text-accent-teal">Why Invest Through a Distributor?</h3>
+                        <ul class="list-none space-y-3 text-gray-700">
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-accent-teal mr-2 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v5a1 1 0 102 0V7z" clip-rule="evenodd"></path></svg>
+                              <strong>Personalized Planning:</strong> Receive advice tailored to your goals (retirement, child's education, house down payment).
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-accent-teal mr-2 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path></svg>
+                                <strong>Unbiased Selection:</strong> Access a curated list of top-performing schemes from various AMCs.
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-accent-teal mr-2 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 002 0V8a1 1 0 00-.445-.832l-2-1a1 1 0 00-.001 0z" clip-rule="evenodd"></path></svg>
+                                <strong>Documentation & Process:</strong> Get seamless, paperless assistance with KYC, transactions, and portfolio maintenance.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        
+<section id="calculators" class="py-16 md:py-24 bg-gray-50">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl font-bold section-header mb-12 text-center">Investment Calculators</h2>
+                <p class="text-center text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
+                    Calculate your estimated future wealth by adjusting your monthly commitment (SIP) or lump sum contribution.
+                </p>
+
+                
+<div class="flex justify-center mb-8">
+                    <button id="sip-tab" onclick="switchCalculator('sip')" class="tab-button active text-primary-bg border-2 border-accent-teal px-6 py-3 rounded-l-xl focus:outline-none">
+                        SIP Calculator
+                    </button>
+                    <button id="lumpsum-tab" onclick="switchCalculator('lumpsum')" class="tab-button bg-white text-primary-bg border-2 border-accent-teal px-6 py-3 rounded-r-xl focus:outline-none hover:bg-gray-100">
+                        Lumpsum Calculator
+                    </button>
+                </div>
+
+                <div class="bg-white p-8 rounded-2xl shadow-2xl border-t-4 border-accent-teal">
+                    <div id="sip-calculator" class="calculator-panel">
+                        
+<h3 class="text-2xl font-bold mb-6 text-primary-bg">Systematic Investment Plan (SIP)</h3>
+                        <div class="space-y-6">
+                            
+<div>
+                                <label for="sip_monthly_amount_slider" class="block text-lg font-medium mb-2 flex justify-between items-center">
+                                    <span>Monthly SIP Amount (₹)</span>
+                                    <input type="number" id="sip_monthly_amount_input" value="10000" min="500" max="100000" step="500" class="calc-input" oninput="updateCalculatorInputs('sip', 'monthly_amount')">
+                                </label>
+                                <input type="range" id="sip_monthly_amount_slider" min="500" max="100000" step="500" value="10000" oninput="updateCalculatorInputs('sip', 'monthly_amount')">
+                            </div>
+                            
+<div>
+                                <label for="sip_rate_slider" class="block text-lg font-medium mb-2 flex justify-between items-center">
+                                    <span>Expected Annual Return (%)</span>
+                                    <input type="number" id="sip_rate_input" value="12" min="1" max="30" step="0.5" class="calc-input" oninput="updateCalculatorInputs('sip', 'rate')">
+                                </label>
+                                <input type="range" id="sip_rate_slider" min="1" max="30" step="0.5" value="12" oninput="updateCalculatorInputs('sip', 'rate')">
+                            </div>
+                            
+<div>
+                                <label for="sip_years_slider" class="block text-lg font-medium mb-2 flex justify-between items-center">
+                                    <span>Time Period (Years)</span>
+                                    <input type="number" id="sip_years_input" value="10" min="1" max="50" step="1" class="calc-input" oninput="updateCalculatorInputs('sip', 'years')">
+                                </label>
+                                <input type="range" id="sip_years_slider" min="1" max="50" step="1" value="10" oninput="updateCalculatorInputs('sip', 'years')">
+                            </div>
+                        </div>
+
+                        
+<div class="mt-8 pt-6 border-t border-gray-200">
+                            <div class="flex justify-between items-center py-3 bg-gray-50 rounded-lg px-4 mb-2">
+                                <span class="text-lg font-medium text-gray-600">Invested Amount:</span>
+                                <span class="text-2xl font-bold text-primary-bg" id="sip_invested">₹ 12,00,000</span>
+                            </div>
+                            <div class="flex justify-between items-center py-3 bg-gray-50 rounded-lg px-4 mb-2">
+                                <span class="text-lg font-medium text-gray-600">Expected Gain:</span>
+                                <span class="text-2xl font-bold text-accent-teal" id="sip_gain">₹ 11,21,111</span>
+                            </div>
+                            <div class="flex justify-between items-center py-4 primary-bg text-white rounded-lg px-4">
+                                <span class="text-xl font-medium">Total Maturity Value:</span>
+                                <span class="text-3xl font-extrabold text-cta-color" id="sip_total_value">₹ 23,21,111</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="lumpsum-calculator" class="calculator-panel hidden">
+                        
+<h3 class="text-2xl font-bold mb-6 text-primary-bg">One-Time (Lumpsum) Investment</h3>
+                        <div class="space-y-6">
+                            
+<div>
+                                <label for="lumpsum_amount_slider" class="block text-lg font-medium mb-2 flex justify-between items-center">
+                                    <span>One-time Investment (₹)</span>
+                                    <input type="number" id="lumpsum_amount_input" value="100000" min="1000" max="1000000" step="1000" class="calc-input" oninput="updateCalculatorInputs('lumpsum', 'amount')">
+                                </label>
+                                <input type="range" id="lumpsum_amount_slider" min="1000" max="1000000" step="1000" value="100000" oninput="updateCalculatorInputs('lumpsum', 'amount')">
+                            </div>
+                            
+<div>
+                                <label for="lumpsum_rate_slider" class="block text-lg font-medium mb-2 flex justify-between items-center">
+                                    <span>Expected Annual Return (%)</span>
+                                    <input type="number" id="lumpsum_rate_input" value="12" min="1" max="30" step="0.5" class="calc-input" oninput="updateCalculatorInputs('lumpsum', 'rate')">
+                                </label>
+                                <input type="range" id="lumpsum_rate_slider" min="1" max="30" step="0.5" value="12" oninput="updateCalculatorInputs('lumpsum', 'rate')">
+                            </div>
+                            
+<div>
+                                <label for="lumpsum_years_slider" class="block text-lg font-medium mb-2 flex justify-between items-center">
+                                    <span>Time Period (Years)</span>
+                                    <input type="number" id="lumpsum_years_input" value="10" min="1" max="50" step="1" class="calc-input" oninput="updateCalculatorInputs('lumpsum', 'years')">
+                                </label>
+                                <input type="range" id="lumpsum_years_slider" min="1" max="50" step="1" value="10" oninput="updateCalculatorInputs('lumpsum', 'years')">
+                            </div>
+                        </div>
+
+                        
+<div class="mt-8 pt-6 border-t border-gray-200">
+                            <div class="flex justify-between items-center py-3 bg-gray-50 rounded-lg px-4 mb-2">
+                                <span class="text-lg font-medium text-gray-600">Invested Amount:</span>
+                                <span class="text-2xl font-bold text-primary-bg" id="lumpsum_invested">₹ 1,00,000</span>
+                            </div>
+                            <div class="flex justify-between items-center py-3 bg-gray-50 rounded-lg px-4 mb-2">
+                                <span class="text-lg font-medium text-gray-600">Expected Gain:</span>
+                                <span class="text-2xl font-bold text-accent-teal" id="lumpsum_gain">₹ 2,10,585</span>
+                            </div>
+                            <div class="flex justify-between items-center py-4 primary-bg text-white rounded-lg px-4">
+                                <span class="text-xl font-medium">Total Maturity Value:</span>
+                                <span class="text-3xl font-extrabold text-cta-color" id="lumpsum_total_value">₹ 3,10,585</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="mt-6 text-center text-sm text-gray-500">
+                    *Calculations are based on assumed returns and are for illustration purposes only. Actual returns may vary.
+                </p>
+            </div>
+        </section>
+
+        
+<section id="partners" class="py-12 md:py-16 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl font-bold section-header mb-10 text-center">I Offer Funds From Top AMCs</h2>
+                <p class="text-center text-lg text-gray-600 mb-8 max-w-4xl mx-auto">
+                    As an independent distributor, I offer access to a wide and curated range of schemes from India's leading Asset Management Companies, ensuring your portfolio has the best fit for your goals.
+                </p>
+
+                <div class="flex flex-wrap justify-center items-center gap-6 md:gap-12">
+                    <span class="text-lg md:text-xl font-bold primary-bg text-cta-color px-4 py-2 rounded-lg shadow-lg transform hover:scale-105 transition duration-300 tracking-wide">UTI Mutual Fund</span>
+                    <span class="text-lg md:text-xl font-bold primary-bg text-cta-color px-4 py-2 rounded-lg shadow-lg transform hover:scale-105 transition duration-300 tracking-wide">SBI Mutual Fund</span>
+                    <span class="text-lg md:text-xl font-bold primary-bg text-cta-color px-4 py-2 rounded-lg shadow-lg transform hover:scale-105 transition duration-300 tracking-wide">Nippon India Mutual Fund</span>
+                    
+<span class="text-lg md:text-xl font-bold primary-bg text-cta-color px-4 py-2 rounded-lg shadow-lg transform hover:scale-105 transition duration-300 tracking-wide">ICICI Prudential Mutual Fund</span>
+                </div>
+            </div>
+        </section>
+
+        
+<section id="contact" class="py-16 md:py-24 primary-bg text-white">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl font-bold section-header text-white mb-12 text-center">Connect With Me</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                    
+
+<div>
+                        <h3 class="text-2xl font-semibold mb-4 text-accent-teal">Send Me a Message</h3>
+                        <form id="contactForm"
+      action="https://script.google.com/macros/s/AKfycbwXy4ViACReFWZmwRXVgUhdvLCWTBb1GyrP5e5iPIBhp6WtAgeuShBj6RBpw88U7Yeb/exec"
+      method="POST"
+      
+      class="space-y-4">
+
+                            <div>
+                                <label for="name" class="block text-sm font-medium mb-1">Full Name</label>
+                                <input type="text" id="name" name="name" required class="w-full px-4 py-2 rounded-lg text-gray-800 focus:ring-accent-teal focus:border-accent-teal border-gray-300">
+                            </div>
+                            <div>
+                                <label for="email" class="block text-sm font-medium mb-1">Email Address</label>
+                                <input type="email" id="email" name="email" required class="w-full px-4 py-2 rounded-lg text-gray-800 focus:ring-accent-teal focus:border-accent-teal border-gray-300">
+                            </div>
+                            <div>
+                                <label for="phone" class="block text-sm font-medium mb-1">Phone Number (Optional)</label>
+                                <input type="tel" id="phone" name="phone" class="w-full px-4 py-2 rounded-lg text-gray-800 focus:ring-accent-teal focus:border-accent-teal border-gray-300">
+                            </div>
+                            <div>
+                                <label for="message" class="block text-sm font-medium mb-1">How can I help you?</label>
+                                <textarea id="message" name="message" rows="4" required class="w-full px-4 py-2 rounded-lg text-gray-800 focus:ring-accent-teal focus:border-accent-teal border-gray-300"></textarea>
+                            </div>
+                            <button type="submit" class="cta-button w-full text-primary-bg font-bold px-6 py-3 rounded-lg shadow-md hover:shadow-lg transition">
+                                Submit Enquiry
+                            </button>
+                            <input type="hidden" name="secretToken" value="aruparn$327870">
+
+                        </form>
+                    </div>
+
+                    
+<div>
+                        <h3 class="text-2xl font-semibold mb-4 text-accent-teal">My Details</h3>
+                        <div class="space-y-6 text-lg">
+                            <p>
+                                <span class="font-bold block text-xl mb-1">Email:</span>
+                                <a href="mailto:arupjj15@gmail.com" class="hover:text-cta-color transition">arupjj15@gmail.com</a>
+                            </p>
+                            <p>
+                                <span class="font-bold block text-xl mb-1">Phone:</span>
+                                <a href="tel:+917003474765" class="hover:text-cta-color transition">+91 70034 74765</a>
+                            </p>
+                            
+ <p class="flex items-center gap-2 mt-1 text-gray-700">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
+       alt="WhatsApp"
+       class="w-5 h-5 inline-block">
+  <a href="https://wa.me/917003474765?text=Hi%20Arup,%20I%20want%20to%20invest%20in%20mutual%20funds!"
+     target="_blank"
+     class="text-green-600 hover:text-green-700 font-medium">
+     Chat on WhatsApp
+  </a>
+</p>
+
+
+                            
+<p>
+                                <span class="font-bold block text-xl mb-1">Office Address:</span>
+                                <span class="block text-base leading-relaxed">
+                                    Jailkhana Mor,Tamluk<br>
+                                    Near Mahaprabhu Mandir.</span>
+                            </p>
+                            
+                            <p class="text-sm pt-4 italic">
+                                *Mutual fund investments are subject to market risks. Please read the offer document carefully before investing.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    
+<footer class="bg-gray-800 text-white py-6">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            
+            <p class="text-xs mb-2 text-gray-400">
+                **Regulatory Note:** I am a Mutual Fund Distributor (MFD). I do not offer Registered Investment Advisory (RIA) services.
+            </p>
+
+            <p class="text-sm">
+                &copy; <span id="currentYear"></span> Arup Bhowmik - Mutual Fund Distributor. All Rights Reserved.
+            </p>
+            <div class="mt-2 space-x-3 text-sm">
+                <span class="font-semibold text-cta-color">AMFI Reg No:</span> 327870
+                <span>|</span>
+                <a href="#" class="hover:text-cta-color transition">Disclaimer</a>
+                <span>|</span>
+                <a href="#" class="hover:text-cta-color transition">Privacy Policy</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Set the current year for the copyright notice
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // --- Scheduling Link Setup (Cleaned) ---
+        // The previous code block was causing a TypeError because it tried to access 'schedule-link' and 
+        // 'mobile-schedule-link', which were removed from the HTML in a previous step.
+        // The primary CTA is now a simple link to #contact.
+        const YOUR_SCHEDULING_LINK = "https://calendly.com/arup-bhowmik/intro-call?email=arupjj15@gmail.com"; 
+        
+        // Removed error-causing document.getElementById('schedule-link').href = ...
+
+        // --- Mobile Navigation Logic ---
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        function toggleMobileMenu() {
+            if (mobileMenu.classList.contains('-translate-x-full')) {
+                // Show menu
+                mobileMenu.classList.remove('-translate-x-full');
+            } else {
+                // Hide menu
+                mobileMenu.classList.add('-translate-x-full');
+            }
+        }
+
+
+        // --- Simulated Contact Form Submission & Modal Logic ---
+        const contactForm = document.getElementById('contactForm');
+        const messageModal = document.getElementById('messageModal');
+        const modalContent = document.getElementById('modalContent');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalMessage = document.getElementById('modalMessage');
+        const closeModalButton = document.getElementById('closeModal');
+        
+        function showModal(title, message) {
+            modalTitle.textContent = title;
+            modalMessage.textContent = message;
+            messageModal.classList.remove('hidden');
+            // Animate in
+            setTimeout(() => {
+                messageModal.style.opacity = '1';
+                modalContent.style.transform = 'scale(1)';
+                modalContent.style.opacity = '1';
+            }, 10);
+        }
+
+        function hideModal() {
+            // Animate out
+            modalContent.style.transform = 'scale(0.95)';
+            modalContent.style.opacity = '0';
+            messageModal.style.opacity = '0';
+            setTimeout(() => {
+                messageModal.classList.add('hidden');
+            }, 300);
+        }
+
+        closeModalButton.addEventListener('click', hideModal);
+
+        contactForm.addEventListener('submit', async function (e) {
+  e.preventDefault();
+
+  // Show your thank-you modal immediately
+  showModal(
+    'Thank You!',
+    'Your message has been received, I will personally review your inquiry and get back to you within 24 hours. In the meantime, feel free to make a direct call using the link!'
+  );
+
+  // Prepare and send data
+  const formData = new FormData(contactForm);
+  const plainData = Object.fromEntries(formData.entries());
+
+  try {
+    await fetch(contactForm.action, {
+      method: 'POST',
+      mode: 'no-cors',
+      body: JSON.stringify(plainData),
+      headers: { 'Content-Type': 'application/json' }
+    });
+    contactForm.reset();
+  } catch (err) {
+    console.error('Submission failed:', err);
+  }
+});
+
+
+
+
+        // --- Calculator Logic ---
+
+        const currencyFormatter = new Intl.NumberFormat('en-IN', {
+            style: 'currency',
+            currency: 'INR',
+            maximumFractionDigits: 0,
+        });
+        
+
+        // --- SYNCHRONIZATION FUNCTION (Fixes the slider/input bug) ---
+        function updateCalculatorInputs(mode, field) {
+            let inputId, sliderId, calculateFunction;
+
+            if (mode === 'sip') {
+                calculateFunction = calculateSIP;
+                if (field === 'monthly_amount') {
+                    inputId = 'sip_monthly_amount_input';
+                    sliderId = 'sip_monthly_amount_slider';
+                } else if (field === 'rate') {
+                    inputId = 'sip_rate_input';
+                    sliderId = 'sip_rate_slider';
+                } else if (field === 'years') {
+                    inputId = 'sip_years_input';
+                    sliderId = 'sip_years_slider';
+                }
+            } else if (mode === 'lumpsum') {
+                calculateFunction = calculateLumpsum;
+                if (field === 'amount') {
+                    inputId = 'lumpsum_amount_input';
+                    sliderId = 'lumpsum_amount_slider';
+                } else if (field === 'rate') {
+                    inputId = 'lumpsum_rate_input';
+                    sliderId = 'lumpsum_rate_slider';
+                } else if (field === 'years') {
+                    inputId = 'lumpsum_years_input';
+                    sliderId = 'lumpsum_years_slider';
+                }
+            }
+
+            const input = document.getElementById(inputId);
+            const slider = document.getElementById(sliderId);
+            const min = parseFloat(slider.min);
+            const max = parseFloat(slider.max);
+            const step = parseFloat(slider.step);
+
+            let value = parseFloat(input.value) || parseFloat(slider.value); 
+            
+            // Determine the source of the event and synchronize the other element
+            if (document.activeElement === input) {
+                // Input box changed: Sanitize/Clamp value
+                if (isNaN(value) || value < min) value = min;
+                value = Math.max(min, Math.min(max, value));
+                value = Math.round(value / step) * step; // Snap to step
+                
+                // Sync the slider position immediately
+                slider.value = value;
+                
+            } else if (document.activeElement === slider) {
+                // Slider changed: Use its value
+                value = parseFloat(slider.value);
+            }
+            
+            // Ensure both elements reflect the final synchronized value (clamped if necessary)
+            input.value = value;
+            slider.value = value;
+            
+            // Run the calculation
+            calculateFunction();
+        }
+
+        // ------------------------------------
+        // SIP Calculator Functions
+        // ------------------------------------
+        function calculateSIP() {
+            // Retrieve values directly from their respective elements (already synchronized by updateCalculatorInputs)
+            const P = parseFloat(document.getElementById('sip_monthly_amount_input').value);
+            const R_annual = parseFloat(document.getElementById('sip_rate_input').value);
+            const Y = parseFloat(document.getElementById('sip_years_input').value);
+
+            if (P <= 0 || R_annual <= 0 || Y <= 0 || isNaN(P) || isNaN(R_annual) || isNaN(Y)) {
+                document.getElementById('sip_invested').textContent = currencyFormatter.format(0).replace('₹', '₹ ');
+                document.getElementById('sip_gain').textContent = currencyFormatter.format(0).replace('₹', '₹ ');
+                document.getElementById('sip_total_value').textContent = currencyFormatter.format(0).replace('₹', '₹ ');
+                return;
+            }
+
+            // Calculation
+            const N = Y * 12; // Total number of installments (months)
+            const R_monthly = R_annual / 1200; // Monthly rate (decimal)
+
+            // Future Value of an Annuity (SIP) formula
+            const power_term = Math.pow(1 + R_monthly, N);
+            // Added 1+R_monthly term at the end for beginning of period investment (standard for SIP)
+            let total_value = P * (power_term - 1) / R_monthly * (1 + R_monthly);
+            
+            const invested = P * N;
+            const gain = total_value - invested;
+
+            // Update Results
+            document.getElementById('sip_invested').textContent = currencyFormatter.format(invested).replace('₹', '₹ ');
+            document.getElementById('sip_gain').textContent = currencyFormatter.format(Math.max(0, gain)).replace('₹', '₹ ');
+            document.getElementById('sip_total_value').textContent = currencyFormatter.format(total_value).replace('₹', '₹ ');
+        }
+
+        // ------------------------------------
+        // Lumpsum Calculator Functions
+        // ------------------------------------
+        function calculateLumpsum() {
+            // Retrieve values directly from their respective elements
+            const P = parseFloat(document.getElementById('lumpsum_amount_input').value);
+            const R_annual = parseFloat(document.getElementById('lumpsum_rate_input').value);
+            const Y = parseFloat(document.getElementById('lumpsum_years_input').value);
+
+            if (P <= 0 || R_annual <= 0 || Y <= 0 || isNaN(P) || isNaN(R_annual) || isNaN(Y)) {
+                document.getElementById('lumpsum_invested').textContent = currencyFormatter.format(0).replace('₹', '₹ ');
+                document.getElementById('lumpsum_gain').textContent = currencyFormatter.format(0).replace('₹', '₹ ');
+                document.getElementById('lumpsum_total_value').textContent = currencyFormatter.format(0).replace('₹', '₹ ');
+                return;
+            }
+
+            // Calculation (Lumpsum: FV = P * (1 + R)^Y)
+            const R_decimal = R_annual / 100;
+            const total_value = P * Math.pow(1 + R_decimal, Y);
+
+            const invested = P;
+            const gain = total_value - invested;
+
+            // Update Results
+            document.getElementById('lumpsum_invested').textContent = currencyFormatter.format(invested).replace('₹', '₹ ');
+            document.getElementById('lumpsum_gain').textContent = currencyFormatter.format(Math.max(0, gain)).replace('₹', '₹ ');
+            document.getElementById('lumpsum_total_value').textContent = currencyFormatter.format(total_value).replace('₹', '₹ ');
+        }
+
+        // ------------------------------------
+        // Tab/Toggle Logic
+        // ------------------------------------
+        function switchCalculator(mode) {
+            const sipPanel = document.getElementById('sip-calculator');
+            const lumpsumPanel = document.getElementById('lumpsum-calculator');
+            const sipTab = document.getElementById('sip-tab');
+            const lumpsumTab = document.getElementById('lumpsum-tab');
+
+            if (mode === 'sip') {
+                sipPanel.classList.remove('hidden');
+                lumpsumPanel.classList.add('hidden');
+
+                // SIP Active
+                sipTab.classList.add('active', 'bg-accent-teal');
+                sipTab.classList.remove('bg-white', 'text-primary-bg');
+
+                // Lumpsum Inactive
+                lumpsumTab.classList.remove('active', 'bg-accent-teal');
+                lumpsumTab.classList.add('bg-white', 'text-primary-bg');
+                
+                // Recalculate SIP to ensure display is fresh
+                calculateSIP();
+
+            } else if (mode === 'lumpsum') {
+                lumpsumPanel.classList.remove('hidden');
+                sipPanel.classList.add('hidden');
+
+                // Lumpsum Active
+                lumpsumTab.classList.add('active', 'bg-accent-teal');
+                lumpsumTab.classList.remove('bg-white', 'text-primary-bg');
+                
+                // SIP Inactive
+                sipTab.classList.remove('active', 'bg-accent-teal');
+                sipTab.classList.add('bg-white', 'text-primary-bg');
+
+                // Recalculate Lumpsum to ensure display is fresh
+                calculateLumpsum();
+            }
+        }
+
+        // Initial Synchronization on Load
+        window.onload = function() {
+            // Set initial year
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+            
+            // Explicitly sync all inputs once on load
+            updateCalculatorInputs('sip', 'monthly_amount');
+            updateCalculatorInputs('sip', 'rate');
+            updateCalculatorInputs('sip', 'years');
+            updateCalculatorInputs('lumpsum', 'amount');
+            updateCalculatorInputs('lumpsum', 'rate');
+            updateCalculatorInputs('lumpsum', 'years');
+
+            // Ensure SIP is the default view and calculate it
+            switchCalculator('sip'); 
+        };
+    </script>
+    <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
+</body>
+</html>
