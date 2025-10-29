@@ -222,17 +222,26 @@ p, li, span {
         input[type=range]::-webkit-slider-thumb {
             -webkit-appearance: none;
             appearance: none;
-            width: 20px;
-            height: 20px;
+            
+            /* 👇 NEW: Make physical touch area larger */
+            width: 30px; 
+            height: 30px;
+            
             background: #13C2C2; /* Teal thumb */
             border-radius: 50%;
             cursor: pointer;
+            
+            /* 👇 CHANGE: Adjust shadow spread to compensate for larger size, or keep the shadow the same */
             box-shadow: 0 0 0 4px rgba(19, 194, 194, 0.3);
-            margin-top: -6px; /* Adjust to center thumb on track */
+            
+            /* 👇 CHANGE: Adjust margin-top for the new 30px height (30px / 2 - track height / 2 = 15 - 4 = 11) */
+            margin-top: -11px; 
         }
         input[type=range]::-moz-range-thumb {
-            width: 20px;
-            height: 20px;
+            /* 👇 NEW: Make physical touch area larger */
+            width: 30px;
+            height: 30px;
+            
             background: #13C2C2; /* Teal thumb */
             border-radius: 50%;
             cursor: pointer;
