@@ -213,6 +213,8 @@ p, li, span {
             background: #e0e0e0; /* Light gray track */
             border-radius: 4px;
             cursor: pointer;
+            /* 👇 SOLUTION: Fixes the mobile touch-and-hold requirement */
+            touch-action: manipulation;
         }
         input[type=range]::-webkit-slider-thumb {
             -webkit-appearance: none;
@@ -366,7 +368,7 @@ p, li, span {
             </nav>
             <div class="flex items-center space-x-4">
                 
-                <a href="#contact" class="cta-button primary-bg px-4 py-2 rounded-lg font-semibold hidden md:block shadow-md">Make a Call Now!</a>
+                <a href="#contact" class="cta-button primary-bg px-4 py-2 rounded-lg font-semibold hidden md:block shadow-md">Book a Free Call</a>
             
                 <button id="mobile-menu-button" class="md:hidden text-white focus:outline-none p-2 rounded-md hover:bg-gray-700 transition duration-150" onclick="toggleMobileMenu()">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
@@ -904,8 +906,7 @@ Starting early and staying invested with discipline helps you benefit the most f
                                 <span class="font-bold block text-xl mb-1">Office Address:</span>
                                 <span class="block text-base leading-relaxed">
                                     Jailkhana Mor,Tamluk<br>
-                                    Near Mahaprabhu Mandir.<br>
-                                    Purba Medinipur,721636</span>
+                                    Near Mahaprabhu Mandir.</span>
                             </p>
                             
                             <p class="text-sm pt-4 italic">
@@ -1225,14 +1226,6 @@ Starting early and staying invested with discipline helps you benefit the most f
     // --- SWIPER INITIALIZATION SCRIPT ---
     const swiper = new Swiper('#fundSlider', {
         // Core Settings
-navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-            // Add custom class to navigation elements
-            // This is actually done via CSS targeting default Swiper elements,
-            // but we can add more specific classes to the buttons if needed for more complex styles.
-            // For now, we'll target the default .swiper-button-prev/.next classes.
-        },
         direction: 'horizontal',
         loop: true, // Makes the slider cycle infinitely
         slidesPerView: 1, // Default: show 1 card at a time
