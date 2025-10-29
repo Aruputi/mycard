@@ -6,16 +6,28 @@
     <title>Arup Bhowmik | Mutual Fund Distributor - Grow Your Wealth</title>
     
 <script src="https://cdn.tailwindcss.com"></script>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         /* Custom Font Import */
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+       
         
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f7f9fc; /* Light, professional background */
-            color: #1f2937; /* Dark gray text */
-            scroll-behavior: smooth;
-        }
+    font-family: 'Manrope', sans-serif;
+    background-color: #f7f9fc;
+    color: #1f2937;
+    scroll-behavior: smooth;
+}
+
+h1, h2, h3, h4 {
+    letter-spacing: -0.5px;
+    font-weight: 700;
+}
+
+p, li, span {
+    line-height: 1.7;
+}
+
 
         /* --- VIBRANT COLOR PALETTE --- */
         .primary-bg { /* Deep Navy/Charcoal - Trust and Depth */
@@ -49,27 +61,44 @@
         .hero-animate .cta-group { animation-delay: 0.5s; }
 
         /* --- UPDATED: Hero Background Image and Overlay --- */
-        .hero-background-image {
-            /* Using an abstract image related to finance, growth, or charts */
-            background-image: url('heroback.jpg');
-            background-size: cover;
-            background-position: center;
-            position: relative; /* Establish context for z-index and pseudo-element */
-            z-index: 1;
-        }
-        
-        /* Dark overlay for maximum text legibility */
-        .hero-background-image::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-            /* Deep Navy overlay with 75% opacity */
-            background-color: rgba(8, 32, 50, 0.75); 
-            z-index: 2;
-        }
+        /* --- MODERN LIGHT ANIMATED GRADIENT BACKGROUND --- */
+
+/* --- MODERN BLUE ANIMATED GRADIENT BACKGROUND --- */
+.hero-background-image {
+    background: linear-gradient(120deg, #bbdefb, #e3f2fd, #b3e5fc);
+    background-size: 400% 400%;
+    animation: gradientMove 15s ease infinite;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+}
+
+/* Soft glowing overlay */
+.hero-background-image::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 25% 30%, rgba(255, 255, 255, 0.5), transparent 60%),
+                radial-gradient(circle at 75% 70%, rgba(255, 255, 255, 0.4), transparent 60%);
+    animation: floatBlobs 20s ease-in-out infinite alternate;
+    z-index: 1;
+}
+
+/* Animate gradient smoothly */
+@keyframes gradientMove {
+    0%   { background-position: 0% 50%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Subtle floating light motion */
+@keyframes floatBlobs {
+    0%   { transform: translateY(0px) scale(1); }
+    50%  { transform: translateY(-25px) scale(1.08); }
+    100% { transform: translateY(0px) scale(1); }
+}
+
+
         /* Ensure the content (text and buttons) sits above the overlay */
         .hero-background-image > .max-w-7xl {
             position: relative;
@@ -118,6 +147,16 @@
             /* Teal glow shadow */
             box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.3), 0 0 0 4px #13C2C2; 
         }
+        
+        /* --- NEW: Floating Section Style for visual highlight (Applied to inner containers) --- */
+.floating-section-content-wrapper {
+    background-color: #ffffff; /* White background for the floating block */
+    padding: 3rem; /* Add generous padding */
+    border-radius: 1.5rem; /* Large rounded corners */
+    box-shadow: 0 20px 50px -10px rgba(8, 32, 50, 0.2); /* Deep Navy shadow for depth */
+    border: 1px solid #e0e0e0; /* Subtle light border */
+}
+
 
         /* Calculator Styles */
         input[type=range] {
@@ -308,13 +347,15 @@
             <a href="#partners" onclick="toggleMobileMenu()" class="text-white text-xl hover:text-accent-teal transition duration-150 py-2 border-b border-gray-700">Partners</a>
             <a href="#contact" onclick="toggleMobileMenu()" class="text-white text-xl hover:text-accent-teal transition duration-150 py-2 mb-4">Contact</a>
             
-            <!-- The 'Schedule Your Free Consultation' link (id="mobile-schedule-link") has been removed to match the updated navigation intent. -->
-        </nav>
+            </nav>
     </div>
 
     <main>
         
-<section id="hero" class="hero-background-image text-white py-20 md:py-32">
+<section id="hero" class="hero-background-image text-primary-bg py-20 md:py-32">
+
+
+
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center hero-animate">
                 <h2 class="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4 leading-tight">
                     Your Trusted Partner for <span class="text-accent-teal">Mutual Fund Investments</span>
@@ -333,8 +374,8 @@
         </section>
 
         
-<section id="about" class="py-16 md:py-24 bg-white">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<section id="about" class="py-16 md:py-24 bg-indigo-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 floating-section-content-wrapper">
                 <h2 class="text-3xl font-bold section-header mb-12 text-center">About Arup Bhowmik & My Philosophy</h2>
                 <div class="md:flex md:space-x-12 items-center">
                     
@@ -373,7 +414,7 @@
 
         
 <section id="services" class="py-16 md:py-24 bg-indigo-50"> 
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 floating-section-content-wrapper">
                 <h2 class="text-3xl font-bold section-header mb-12 text-center">How I Help You Grow</h2>
                 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -414,8 +455,8 @@
         </section>
 
         
-<section id="performance" class="py-16 md:py-24 bg-white">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<section id="performance" class="py-16 md:py-24 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 floating-section-content-wrapper">
                 <h2 class="text-3xl font-bold section-header mb-8 text-center">AMC Performance Showcase</h2>
                 <p class="text-center text-lg text-gray-600 mb-10 max-w-3xl mx-auto">
                     A glimpse at some of the top-performing schemes I recommend from leading AMCs. Details till September 2025.
@@ -488,7 +529,6 @@
                             </div>
                         </div>
                         
-                        <!-- CLONES for infinite loop effect -->
                         <div class="fund-card rounded-xl shadow-lg">
                             <h3 class="text-lg font-bold text-accent-teal mb-2">ICICI Large Cap Fund-Reg-Gr</h3>
                             <p class="text-sm text-gray-700 font-semibold mb-3">Category: Large Equity</p>
@@ -611,7 +651,7 @@ Starting early and staying invested with discipline helps you benefit the most f
 
         
 <section id="calculators" class="py-16 md:py-24 bg-gray-50">
-            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 floating-section-content-wrapper">
                 <h2 class="text-3xl font-bold section-header mb-12 text-center">Investment Calculators</h2>
                 <p class="text-center text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
                     Calculate your estimated future wealth by adjusting your monthly commitment (SIP) or lump sum contribution.
@@ -730,8 +770,8 @@ Starting early and staying invested with discipline helps you benefit the most f
         </section>
 
         
-<section id="partners" class="py-12 md:py-16 bg-white">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<section id="partners" class="py-12 md:py-16 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 floating-section-content-wrapper">
                 <h2 class="text-3xl font-bold section-header mb-10 text-center">I Offer Funds From Top AMCs</h2>
                 <p class="text-center text-lg text-gray-600 mb-8 max-w-4xl mx-auto">
                     As an independent distributor, I offer access to a wide and curated range of schemes from India's leading Asset Management Companies, ensuring your portfolio has the best fit for your goals.
