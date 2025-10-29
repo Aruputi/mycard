@@ -205,7 +205,7 @@ p, li, span {
 
 
         /* Calculator Styles */
-        input[type=range] {
+       input[type=range] {
             width: 100%;
             -webkit-appearance: none;
             appearance: none;
@@ -213,6 +213,11 @@ p, li, span {
             background: #e0e0e0; /* Light gray track */
             border-radius: 4px;
             cursor: pointer;
+            
+            /* 👇 FIX: Improves touch/drag responsiveness on mobile */
+            /* Prevents page scrolling while dragging horizontally on the slider. */
+            /* Allows the browser to handle horizontal drag for the thumb. */
+            touch-action: pan-y; 
         }
         input[type=range]::-webkit-slider-thumb {
             -webkit-appearance: none;
@@ -1034,88 +1039,89 @@ Starting early and staying invested with discipline helps you benefit the most f
         });
         
 
-        // --- SYNCHRONIZATION FUNCTION (FIXED FOR INPUT/DELETE BUG AND PARTIAL INPUT) ---
-        function updateCalculatorInputs(mode, field) {
-            let inputId, sliderId, calculateFunction;
+        // --- SYNCHRONIZATION FUNCTION (Fixes the slider/input bug) ---
+      // Replace the existing updateCalculatorInputs function with the following:
 
-            if (mode === 'sip') {
-                calculateFunction = calculateSIP;
-                if (field === 'monthly_amount') {
-                    inputId = 'sip_monthly_amount_input';
-                    sliderId = 'sip_monthly_amount_slider';
-                } else if (field === 'rate') {
-                    inputId = 'sip_rate_input';
-                    sliderId = 'sip_rate_slider';
-                } else if (field === 'years') {
-                    inputId = 'sip_years_input';
-                    sliderId = 'sip_years_slider';
-                }
-            } else if (mode === 'lumpsum') {
-                calculateFunction = calculateLumpsum;
-                if (field === 'amount') {
-                    inputId = 'lumpsum_amount_input';
-                    sliderId = 'lumpsum_amount_slider';
-                } else if (field === 'rate') {
-                    inputId = 'lumpsum_rate_input';
-                    sliderId = 'lumpsum_rate_slider';
-                } else if (field === 'years') {
-                    inputId = 'lumpsum_years_input';
-                    sliderId = 'lumpsum_years_slider';
-                }
-            }
+// --- SYNCHRONIZATION FUNCTION (Fixes the slider/input bug) ---
+function updateCalculatorInputs(mode, field) {
+    let inputId, sliderId, calculateFunction;
 
-            const input = document.getElementById(inputId);
-            const slider = document.getElementById(sliderId);
-            const min = parseFloat(slider.min);
-            const max = parseFloat(slider.max);
-            const step = parseFloat(slider.step);
-
-            let rawInputNumber = parseFloat(input.value); 
-            let finalValue; // The clamped, stepped, and safe value for calculation and synchronization
-
-            
-            // 1. Determine the source and set input.value if from slider
-            if (document.activeElement === slider) {
-                finalValue = parseFloat(slider.value);
-                input.value = finalValue;
-            } else { 
-                // INPUT or INITIAL LOAD 
-                
-                // Calculate the safe value (finalValue) for calculation and slider sync (MUST be safe/clamped)
-                let valueForClamping = isNaN(rawInputNumber) ? min : rawInputNumber;
-                let clampedForCalc = Math.max(min, Math.min(max, valueForClamping));
-                finalValue = Math.round(clampedForCalc / step) * step;
-                
-                // 3. Decide what to display in the input box
-                const isUserTyping = (document.activeElement === input);
-                
-                // FIX: If user is actively typing a number less than min (e.g., '1'), allow it to display.
-                if (isUserTyping && rawInputNumber < min && !isNaN(rawInputNumber)) {
-                    // Do nothing to input.value. The browser keeps showing the partial number.
-                    // finalValue is correctly set to 'min' (500) for calculation.
-                
-                } else if (isUserTyping && isNaN(rawInputNumber)) {
-                    // User cleared the box while active, keep it blank.
-                    input.value = ''; 
-                    finalValue = min; // Use min for calculation
-
-                } else if (!isUserTyping && isNaN(rawInputNumber)) {
-                    // Not active and input is blank (initial load or blurred).
-                    // Set to default (min) for better UX.
-                    input.value = finalValue; // finalValue is min
-                    
-                } else if (rawInputNumber !== finalValue) {
-                    // Value was clamped (too high, off-step, or below min after blur).
-                    input.value = finalValue;
-                }
-            }
-            
-            // 4. Synchronization and Calculation
-            slider.value = finalValue;
-            
-            // Run the calculation
-            calculateFunction();
+    // (Code to identify elements remains the same)
+    if (mode === 'sip') {
+        calculateFunction = calculateSIP;
+        if (field === 'monthly_amount') {
+            inputId = 'sip_monthly_amount_input';
+            sliderId = 'sip_monthly_amount_slider';
+        } else if (field === 'rate') {
+            inputId = 'sip_rate_input';
+            sliderId = 'sip_rate_slider';
+        } else if (field === 'years') {
+            inputId = 'sip_years_input';
+            sliderId = 'sip_years_slider';
         }
+    } else if (mode === 'lumpsum') {
+        calculateFunction = calculateLumpsum;
+        if (field === 'amount') {
+            inputId = 'lumpsum_amount_input';
+            sliderId = 'lumpsum_amount_slider';
+        } else if (field === 'rate') {
+            inputId = 'lumpsum_rate_input';
+            sliderId = 'lumpsum_rate_slider';
+        } else if (field === 'years') {
+            inputId = 'lumpsum_years_input';
+            sliderId = 'lumpsum_years_slider';
+        }
+    }
+
+    const input = document.getElementById(inputId);
+    const slider = document.getElementById(sliderId);
+    const min = parseFloat(slider.min);
+    const max = parseFloat(slider.max);
+    const step = parseFloat(slider.step);
+
+    let value = parseFloat(input.value); // Get raw number from input. If empty, this is NaN.
+    let skipInputVisualUpdate = false; // Flag to prevent forcing '500' into a blank box.
+
+    // Determine the source of the event and synchronize the other element
+    if (document.activeElement === input) {
+        // Input box changed: Sanitize/Clamp value
+        
+        // Check if the value is a number greater than 0 but less than the minimum (e.g., 1, 10, 100 < 500)
+        const isIntermediate = !isNaN(value) && value > 0 && value < min;
+
+        if (isNaN(value)) {
+            // Case 1: Input is empty/cleared (NaN). Use min for calculation.
+            value = min; 
+            skipInputVisualUpdate = true; // Prevent visual update to keep the box blank.
+
+        } else if (!isIntermediate) {
+            // Case 2: Number is valid and >= min (e.g., 500, 1000). Apply clamping/stepping.
+            // This is the original clamping logic, only applied when not typing an intermediate number.
+            value = Math.max(min, Math.min(max, value));
+            value = Math.round(value / step) * step;
+            
+            // Sync the slider position immediately
+            slider.value = value;
+
+        }
+        // Case 3: If isIntermediate is true, we let the raw value (e.g., 1) pass through for calculation
+        // and rely on the final sync to display it, bypassing the clamping.
+
+    } else if (document.activeElement === slider) {
+        // Slider changed: Use its value
+        value = parseFloat(slider.value);
+    }
+    
+    // Ensure both elements reflect the final synchronized value (clamped if necessary)
+    if (!skipInputVisualUpdate) {
+        // Only update the input field if we didn't determine it should stay blank.
+        input.value = value;
+    }
+    slider.value = value;
+    
+    // Run the calculation
+    calculateFunction();
+}
 
         // ------------------------------------
         // SIP Calculator Functions
@@ -1126,11 +1132,7 @@ Starting early and staying invested with discipline helps you benefit the most f
             const R_annual = parseFloat(document.getElementById('sip_rate_input').value);
             const Y = parseFloat(document.getElementById('sip_years_input').value);
 
-            // Use the SIP slider's minimum value for calculation if P is invalid or 0.
-            const P_safe = isNaN(P) || P <= 0 ? 500 : P; 
-            
-            // Check for other necessary invalid inputs
-            if (R_annual <= 0 || Y <= 0 || isNaN(R_annual) || isNaN(Y)) {
+            if (P <= 0 || R_annual <= 0 || Y <= 0 || isNaN(P) || isNaN(R_annual) || isNaN(Y)) {
                 document.getElementById('sip_invested').textContent = currencyFormatter.format(0).replace('₹', '₹ ');
                 document.getElementById('sip_gain').textContent = currencyFormatter.format(0).replace('₹', '₹ ');
                 document.getElementById('sip_total_value').textContent = currencyFormatter.format(0).replace('₹', '₹ ');
@@ -1144,9 +1146,9 @@ Starting early and staying invested with discipline helps you benefit the most f
             // Future Value of an Annuity (SIP) formula
             const power_term = Math.pow(1 + R_monthly, N);
             // Added 1+R_monthly term at the end for beginning of period investment (standard for SIP)
-            let total_value = P_safe * (power_term - 1) / R_monthly * (1 + R_monthly);
+            let total_value = P * (power_term - 1) / R_monthly * (1 + R_monthly);
             
-            const invested = P_safe * N;
+            const invested = P * N;
             const gain = total_value - invested;
 
             // Update Results
@@ -1231,10 +1233,7 @@ Starting early and staying invested with discipline helps you benefit the most f
             document.getElementById('currentYear').textContent = new Date().getFullYear();
             
             // Explicitly sync all inputs once on load
-            // Call with initial value set to ensure 'finalValue' is correct for calculation
-            document.getElementById('sip_monthly_amount_input').value = 10000;
-            document.getElementById('lumpsum_amount_input').value = 100000;
-            
+            // Note: The fix above handles the empty string issue.
             updateCalculatorInputs('sip', 'monthly_amount');
             updateCalculatorInputs('sip', 'rate');
             updateCalculatorInputs('sip', 'years');
